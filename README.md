@@ -67,7 +67,7 @@ example.c ino the repository is an example of how to use the thread pool.
 void test(void *arg)
 {
     printf("I am a job\n");
-    sleep(10);
+    sleep(5);
 }
 
 int main(void)
@@ -81,7 +81,7 @@ int main(void)
         add_job_to_job_queue(test, NULL);
     }
 
-    sleep(5);
+    sleep(10);
 
     /* destroy the thread pool immediately */
     thread_pool_destroy(0);
@@ -92,7 +92,7 @@ int main(void)
 }
 ```
 
-We use 3 threads initializing the thread pool, then add 100 jobs into it. Each job just print 'I am a job' and sleep 10 seconds. The main function then sleep 5 seconds and destroy the thread pool immediately. Also you can use another way to destroy,  waiting all the job in the pool to complete.
+We use 3 threads initializing the thread pool, then add 100 jobs into it. Each job just print 'I am a job' and sleep 5 seconds. The main function then sleep 10 seconds and destroy the thread pool immediately. Also you can use another way to destroy,  waiting all the job in the pool to complete.
 
 The way to run example.c:
 

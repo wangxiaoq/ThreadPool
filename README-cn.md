@@ -67,7 +67,7 @@ ret = thread_pool_destroy(1);    //参数为1，等待线程池中的任务完�
 void test(void *arg)
 {
     printf("I am a job\n");
-    sleep(10);
+    sleep(5);
 }
 
 int main(void)
@@ -81,7 +81,7 @@ int main(void)
         add_job_to_job_queue(test, NULL);
     }
 
-    sleep(5);
+    sleep(10);
 
     /* destroy the thread pool immediately */
     thread_pool_destroy(0);
@@ -92,7 +92,7 @@ int main(void)
 }
 ```
 
-在main函数中用3个线程初始化线程池；然后添加100个工作任务到线程池中，每个任务都是一样的，打印“I am a job”，然后睡眠10秒。main函数添加完任务之后，睡眠5秒，之后以不等待的方式销毁线程池，即线程池立即被销毁。当然你也可以采用注释掉的线程池的销毁方式，不过就有的等了：）。
+在main函数中用3个线程初始化线程池；然后添加100个工作任务到线程池中，每个任务都是一样的，打印“I am a job”，然后睡眠5秒。main函数添加完任务之后，睡眠10秒，之后以不等待的方式销毁线程池，即线程池立即被销毁。当然你也可以采用注释掉的线程池的销毁方式，不过就有的等了：）。
 
 example.c编译运行方法：
 

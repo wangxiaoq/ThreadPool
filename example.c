@@ -13,7 +13,7 @@
 void test(void *arg)
 {
     printf("I am a job\n");
-    sleep(10);
+    sleep(5);
 }
 
 int main(void)
@@ -27,7 +27,7 @@ int main(void)
         add_job_to_job_queue(test, NULL);
     }
 
-    sleep(5);
+    sleep(10);
 
     /* destroy the thread pool immediately */
     thread_pool_destroy(0);
