@@ -1,6 +1,6 @@
 # 线程池
 
-Author: Herber Wang <wang_xiaoq@126.com>
+Author: Herbert Wang <wang_xiaoq@126.com>
 ---
 
 ## 简介
