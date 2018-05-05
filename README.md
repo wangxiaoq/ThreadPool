@@ -1,49 +1,55 @@
-# 线程池
+# Thread Pool [Chinese Version](./README-cn.md)
 
 Author: Herbert Wang <wang_xiaoq@126.com>
 ---
 
-## 简介
+## Introduction
 
-使用posix标准的线程接口，实现了一个线程池，欢迎克隆和使用。线程池包括两个文件：thread-pool.c和thread-pool.h，在使用的时候需要将thread-pool.h包含到你的代码中；example.c提供了一个使用线程池的示例。
+I implement this thread pool using the posix thread interfaces. PR and fork are welcome. The repository contains three source files: thread-pool.c and thread-pool.h implements the thread pool, and example.c demonstrates how to use the thread pool.
 
-## 接口
+## Interfaces
 
-接口 | 说明 | 参数 | 返回值
+interface | description | arguments | return value
 :-:|:-:| :-: |:-:
-int thread_pool_init(int num) | 初始化线程池 | 线程池中的线程数 | 0：成功；-1：失败
-int thread_pool_destroy(int wait) | 销毁线程池 | 0：立即销毁线程池；1：等待线程池中的工作完成后再销毁 | 0：成功；-1：失败
-int get_total_thread_num(void) | 获取线程池中线程总数 | - | 线程池中线程数目
-typedef void (*job_func_t)(void *arg) | 执行任务的函数类型 | 需要传递到任务函数中的参数 | -
-int add_job_to_job_queue(job_func_t job_func, void *arg) | 添加任务到线程池 | job_func：需要执行的任务；arg：job_func的参数 | 0：成功；-1：失败
-int add_thread_to_thread_queue(int num) | 增大线程池中线程数 | 新添加的线程数量 | 0：成功；-1：失败
+int thread_pool_init(int num) | initialize thread pool | the number of threads into the pool | 0:success; -1: fail
+int thread_pool_destroy(int wait) | destroy thread pool | 0: destroy the thread pool immediately; 1: wait all the job in the thread pool to complete | 0: success; -1: fail
+int get_total_thread_num(void) | get the total number of threads in the thread pool | - | the number of threads in the thread pool
+typedef void (*job_func_t)(void *arg) | the job function need to execute | arg: arguments to pass | -
+int add_job_to_job_queue(job_func_t job_func, void *arg) | add job to thread pool | job_func: the jon need to execute | 0: success; -1: fail
+int add_thread_to_thread_queue(int num) | add threads into thread pool | the number of threads to add | 0: success; -1: fail
 
-## 使用步骤
+## Usage
 
-a. 初始化线程池，例如：
+a. Include 'thread-pool.h' into your source file.
+
+```
+#include "thread-pool.h"
+```
+
+b. Initialize the thread pool:
 
 ```
 int ret = 0;
-ret = thread_pool_init(10);    //用10个线程初始化线程池
+ret = thread_pool_init(10);    //initialize with 10 threads into thread pool
 ```
 
-b. 添加工作任务到线程池中，例如：
+c. Add jobs into thread pool:
 
 ```
 int ret = 0;
 ret = add_job_to_job_queue(job_func, NULL);
 ```
 
-c. 销毁线程池：
+d. Destroy the thread pool:
 
 ```
 int ret = 0;
-ret = thread_pool_destroy(1);    //参数为1，等待线程池中的任务完成后再销毁线程池
+ret = thread_pool_destroy(1);    //wait all the jobs in the pool to complete
 ```
 
-## 示例
+## Demonstration
 
-仓库中的example.c是一个使用示例：
+example.c ino the repository is an example of how to use the thread pool.
 
 ```
 /*
@@ -86,15 +92,15 @@ int main(void)
 }
 ```
 
-在main函数中用3个线程初始化线程池；然后添加100个工作任务到线程池中，每个任务都是一样的，打印“I am a job”，然后睡眠10秒。main函数添加完任务之后，睡眠5秒，之后以不等待的方式销毁线程池，即线程池立即被销毁。当然你也可以采用注释掉的线程池的销毁方式，不过就有的等了：）。
+We use 3 threads initializing the thread pool, then add 100 jobs into it. Each job just print 'I am a job' and sleep 10 seconds. The main function then sleep 5 seconds and destroy the thread pool immediately. Also you can use another way to destroy,  waiting all the job in the pool to complete.
 
-example.c编译运行方法：
+The way to run example.c:
 
 ```
 gcc example.c thread-pool.c -o example -lpthread
 ./example
 ```
 
-## 协议
+## LICENSE
 
 GPL v2
