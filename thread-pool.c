@@ -151,7 +151,7 @@ PRIVATE job_t *get_job_from_job_queue(void)
 API int add_job_to_job_queue(job_func_t job_func, void *arg)
 {
     job_queue_t *job_queue = get_job_queue();
-    job_t *job = malloc(sizeof(job));
+    job_t *job = malloc(sizeof(*job));
     if (job == NULL) {
         DEBUG("malloc error");
         return -1;
