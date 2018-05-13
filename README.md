@@ -1,7 +1,8 @@
-# Thread Pool [Chinese Version](./README-cn.md)
+# Thread Pool 
 
 Author: Herbert Wang <wang_xiaoq@126.com>
----
+
+[中文版](./README-cn.md)
 
 ## Introduction
 
