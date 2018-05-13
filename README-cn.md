@@ -1,7 +1,6 @@
 # 线程池
 
 Author: Herbert Wang <wang_xiaoq@126.com>
----
 
 ## 简介
 
